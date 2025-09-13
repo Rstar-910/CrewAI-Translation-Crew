@@ -1,0 +1,7 @@
+batch_size: 2
+input_doc: input.docx
+llm_model: ollama/mistral:7b
+output_doc: translated_paper.docx
+target_language: Hindi
+translation_quality: high
+verbose: false
