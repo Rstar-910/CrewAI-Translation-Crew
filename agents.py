@@ -1,18 +1,11 @@
 """CrewAI agent definitions for the translation system."""
 
+from __future__ import annotations
+
 import logging
 from typing import Dict, Any
 
-# Import CrewAI components properly
-try:
-    from crewai.agent import Agent
-except ImportError:
-    try:
-        from crewai import Agent
-    except ImportError:
-        # Fallback for different CrewAI versions
-        import crewai
-        Agent = crewai.Agent
+from crewai import Agent
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +13,7 @@ class TranslationAgents:
     """Factory class for creating translation agents."""
     
     @staticmethod
-    def create_translator_agent(target_language: str, llm_model: str = "ollama/mistral:7b") -> Agent:
+    def create_translator_agent(target_language: str, llm_model: str) -> Agent:
         """Create a professional translator agent."""
         return Agent(
             role="Professional Translator",
@@ -41,7 +34,7 @@ class TranslationAgents:
         )
     
     @staticmethod
-    def create_quality_checker_agent(target_language: str, llm_model: str = "ollama/mistral:7b") -> Agent:
+    def create_quality_checker_agent(target_language: str, llm_model: str) -> Agent:
         """Create a quality checker agent for translations."""
         return Agent(
             role="Translation Quality Checker",
@@ -63,7 +56,7 @@ class TranslationAgents:
         )
     
     @staticmethod
-    def create_document_analyzer_agent(llm_model: str = "ollama/mistral:7b") -> Agent:
+    def create_document_analyzer_agent(llm_model: str) -> Agent:
         """Create a document structure analyzer agent."""
         return Agent(
             role="Document Structure Analyzer",
@@ -89,7 +82,7 @@ class AgentFactory:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.target_language = config['target_language']
-        self.llm_model = config.get('llm_model', 'ollama/mistral:7b')
+        self.llm_model = config.get('llm_model', 'ollama/gemma4:31b-cloud')
         
     def create_translator(self) -> Agent:
         """Create translator agent with system configuration."""

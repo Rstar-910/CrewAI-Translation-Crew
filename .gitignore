@@ -205,3 +205,19 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ── CrewAI Translation Crew ───────────────────────────────────────────────────
+
+# Input documents (may contain private/copyrighted content)
+input.docx
+*.docx
+
+# Generated translation output
+translated_paper.docx
+
+# Generated evaluation and benchmark reports
+evaluation_report.txt
+benchmark_report.txt
+
+# Ollama server log written by setup scripts
+ollama.log

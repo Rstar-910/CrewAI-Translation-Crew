@@ -1,7 +1,20 @@
-batch_size: 2
+batch_size: 3
+analysis_sample_size: 15   # paragraphs sampled for pre-translation document analysis
 input_doc: input.docx
-llm_model: ollama/mistral:7b
 output_doc: translated_paper.docx
 target_language: Hindi
-translation_quality: high
-verbose: false
+llm_model: ollama/gemma4:31b-cloud  # 397B MoE — runs on Ollama cloud, not local machine
+translation_quality: high        # high | medium | low
+verbose: true
+cuda_device: null                # null = all GPUs; 0/1/etc. to pin a device
+
+# Parallel batch processing
+async_batch: false          # true = translate batches concurrently via ThreadPoolExecutor
+max_workers: 3              # concurrent workers (async_batch only)
+batch_delay: 1              # seconds between batches in sequential mode
+
+# Quality evaluation (sacrebleu)
+enable_evaluation: false         # true = compute BLEU/chrF after translation
+reference_doc: null              # path to reference file (one line per paragraph)
+                                 # if null, back-translation proxy is used instead
+eval_back_translate_sample: 20   # paragraphs to back-translate when no reference_doc

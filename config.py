@@ -12,12 +12,20 @@ class Config:
     
     DEFAULT_CONFIG = {
         "target_language": "Hindi",
-        "batch_size": 2,
-        "input_doc": "input.docx", 
+        "batch_size": 3,
+        "analysis_sample_size": 15,
+        "input_doc": "input.docx",
         "output_doc": "translated_paper.docx",
-        "llm_model": "ollama/mistral:7b",
+        "llm_model": "ollama/gemma4:31b-cloud",
         "verbose": False,
-        "translation_quality": "high"
+        "translation_quality": "high",
+        "cuda_device": None,
+        "async_batch": False,
+        "max_workers": 3,
+        "batch_delay": 1,
+        "enable_evaluation": False,
+        "reference_doc": None,
+        "eval_back_translate_sample": 20,
     }
     
     def __init__(self, config_file: str = "config.yaml"):
